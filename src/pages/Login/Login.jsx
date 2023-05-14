@@ -1,7 +1,25 @@
 import { Link } from 'react-router-dom';
 import loginLogo from '../../assets/images/login/login.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
+  const {signIn} = useContext(AuthContext)
+
+  const handleLogin = event =>{
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email,password);
+    signIn(email,password)
+    .then(result=>{
+      const loggedUser = result.user;
+      console.log("logged User" ,loggedUser)
+    }).catch(error=>{
+      console.log(error.message)
+    })
+  }
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row ">
@@ -10,6 +28,7 @@ const Login = () => {
           <img src={loginLogo} alt="" />
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <form onSubmit={handleLogin}>
           <div className="card-body">
           <h1 className="text-2xl text-center font-bold">Login</h1>
             <div className="form-control">
@@ -17,8 +36,9 @@ const Login = () => {
                 <span className="label-text">Email</span>
               </label>
               <input
-                type="text"
+                type="email"
                 placeholder="email"
+                name='email'
                 className="input input-bordered"
               />
             </div>
@@ -29,6 +49,7 @@ const Login = () => {
               <input
                 type="text"
                 placeholder="password"
+                name="password"
                 className="input input-bordered"
               />
               <label className="label">
@@ -38,9 +59,11 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              
+              <input type="submit" value="Login" className='btn btn-primary' />
             </div>
           </div>
+          </form>
           <p className='mx-auto my-4 text-sm'>New to Car Doctor? <Link className='text-red-500' to="/signup">Sign Up</Link></p>
         </div>
       </div>

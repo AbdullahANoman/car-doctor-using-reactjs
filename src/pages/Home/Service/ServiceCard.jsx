@@ -15,7 +15,7 @@ const ServiceCard = ({ service }) => {
           <p className="font-semibold text-red-500">Price: ${price}</p>
         </div>
         <div>
-          <Link to={`/checkout:${_id}`}><FaArrowRight className="mr-10 text-red-500"></FaArrowRight></Link>
+          <Link to={`/checkout/${_id}`}><FaArrowRight className="mr-10 text-red-500"></FaArrowRight></Link>
         </div>
       </div>
     </div>
