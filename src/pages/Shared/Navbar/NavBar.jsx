@@ -1,10 +1,34 @@
 import { Link } from "react-router-dom";
-import logo from '../../../assets/logo.svg'
+import logo from "../../../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 const NavBar = () => {
-    const navItems = <>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut().then(() => {})
+      .catch((error) => console.log(error.message));
+  };
+
+  const navItems = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/about">About</Link>
+      </li>
+      {user?.email ? (
+        <>
+        <li><Link to="/bookings">My Bookings</Link></li>
+        <Link to="/"><li><button onClick={handleLogOut}>Log Out</button></li></Link>
+        </>
+      ) : (
+        <li>
+          <Link to="/login">Login</Link>
+        </li>
+      )}
     </>
+  );
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -33,16 +57,16 @@ const NavBar = () => {
           </ul>
         </div>
         <Link to="/">
-        <img src={logo} alt="" />
+          <img src={logo} alt="" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          {navItems}
-        </ul>
+        <ul className="menu menu-horizontal px-1">{navItems}</ul>
       </div>
       <div className="navbar-end">
-      <button className="btn btn-outline text-[#FF3811]  ">Appointment</button>
+        <button className="btn btn-outline text-[#FF3811]  ">
+          Appointment
+        </button>
       </div>
     </div>
   );

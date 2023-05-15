@@ -56,6 +56,7 @@ const CheckOut = () => {
                 name="name"
                 defaultValue={user?.displayName}
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -64,6 +65,7 @@ const CheckOut = () => {
                 
                 name="date"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -72,6 +74,7 @@ const CheckOut = () => {
                 placeholder="Your phone"
                 name="phone"
                 className="input input-bordered"
+                required
               />
             </div>
             <div className="form-control">
@@ -81,6 +84,7 @@ const CheckOut = () => {
                 defaultValue={user?.email}
                 name="email"
                 className="input input-bordered"
+                required
               />
             </div>
           </div>
