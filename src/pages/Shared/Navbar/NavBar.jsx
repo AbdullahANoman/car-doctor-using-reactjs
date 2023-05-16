@@ -5,7 +5,9 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const handleLogOut = () => {
-    logOut().then(() => {})
+    logOut().then(() => {
+      localStorage.removeItem('car-token')
+    })
       .catch((error) => console.log(error.message));
   };
 
